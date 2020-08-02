@@ -1,13 +1,19 @@
 import React from 'react';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setFooter } from '../../actions';
 import './index.less';
 
-export default class Footer extends React.Component {
-  state = {
-    current: 'home',
-  };
+class Footer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      current: props.parentShow,
+    };
+  }
   handleClick = (value) => {
+    this.props.setFooter(value.key);
     this.setState({
       current: value.key,
     });
@@ -48,3 +54,19 @@ export default class Footer extends React.Component {
     );
   }
 }
+
+function mapStateProps(state) {
+  return {
+    parentShow: state.showFooter.show,
+  };
+}
+
+function mapDispatchProps(dispatch) {
+  return {
+    setFooter: (value) => {
+      dispatch(setFooter(value));
+    },
+  };
+}
+
+export default connect(mapStateProps, mapDispatchProps)(Footer);
