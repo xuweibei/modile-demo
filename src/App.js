@@ -1,11 +1,14 @@
 import React from 'react';
 import './App.css';
 import { ViewRouter } from './views/routers';
+import 'antd/dist/antd.css';
 
 function App() {
   return (
     <>
-      <ViewRouter />
+      <div className="root-wrap">
+        <ViewRouter />
+      </div>
     </>
   );
 }

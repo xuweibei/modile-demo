@@ -9,7 +9,7 @@ const HomePage = Loadable({
 const Home = () => (
   <React.Fragment>
     <Route exact path="/" component={() => <Redirect to="/home" />} />
-    <Route path="/home" component={HomePage} />
+    <Route exact path="/home" component={HomePage} />
   </React.Fragment>
 );
 
