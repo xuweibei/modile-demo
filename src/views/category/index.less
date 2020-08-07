@@ -1,0 +1,92 @@
+.category {
+  width: 100%;
+  padding-top: 0.8rem;
+  h2 {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    font-size: 0.38rem;
+    color: #333;
+    font-weight: bold;
+    line-height: 0.8rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: #fff;
+    border-bottom: none;
+  }
+  .cate_center {
+    width: 100%;
+    height: 100% - 1.8rem;
+    .cate_left {
+      width: 30%;
+      float: left;
+      box-shadow: 2px 0 0 rgba(102, 102, 102, 0.4);
+      ul,
+      p,
+      div {
+        margin: 0;
+        padding: 0;
+      }
+      li {
+        font-weight: bold;
+        font-size: 0.3rem;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        padding: 0.2rem 0;
+        text-align: center;
+        color: #666;
+      }
+      .active-color {
+        color: #f00;
+      }
+    }
+    .cate_right {
+      width: 70%;
+      float: right;
+      height: 100% - 6rem;
+      background-color: #f9f9f9;
+      position: absolute;
+      top: 0.8rem;
+      right: 0;
+      overflow-y: scroll;
+      .cate_right_content {
+        padding: 0.3rem 0.3rem 0 0.3rem;
+        margin: 0;
+        .cate_right_title {
+          display: flex;
+
+          align-items: center;
+          text-align: center;
+          margin: 0.6rem 0 0.4rem 0;
+          .cate_name {
+            width: 33%;
+            font-size: 0.3rem;
+            font-family: "PingFang-SC-Medium";
+            font-weight: 500;
+            color: #666;
+          }
+          .line {
+            width: 33%;
+            height: 0.02rem;
+            background: #e5e5e5;
+            text-align: center;
+          }
+        }
+        .cate_right_imgs {
+          display: flex;
+          flex-wrap: wrap;
+          .imgs_item {
+            width: 33.33333%;
+            img {
+              width: 1rem;
+              height: 1rem;
+              border-radius: 50%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

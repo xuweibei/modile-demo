@@ -1,16 +1,16 @@
-import React from 'react';
-import { Menu } from 'antd';
-import { connect } from 'react-redux';
-import methods from '../../http/request';
+import React from "react";
+import { Menu } from "antd";
+import { connect } from "react-redux";
+import methods from "../../http/request";
 
-import './home.less';
-import Footer from '../../component/Footer';
+import "./home.less";
+import Footer from "../../component/Footer";
 
 const { SubMenu } = Menu;
 
 class Home extends React.Component {
   state = {
-    current: 'mail',
+    current: "mail",
   };
 
   componentDidMount() {}

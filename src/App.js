@@ -7,7 +7,6 @@ import "./http";
 import "antd/dist/antd.css";
 
 function App() {
-  console.log("测试");
   return (
     <Provider store={store}>
       <div className="root-wrap">

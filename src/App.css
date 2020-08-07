@@ -40,6 +40,32 @@ body {
   font-size: 0.2rem;
 }
 .root-wrap {
-  width: 7rem;
   display: flex;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+@font-face {
+  font-family: "iconfont"; /* project id 1151553 */
+  src: url("//at.alicdn.com/t/font_1151553_3evtpbpfz0o.eot");
+  src: url("//at.alicdn.com/t/font_1151553_3evtpbpfz0o.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://at.alicdn.com/t/font_1151553_3evtpbpfz0o.woff2")
+      format("woff2"),
+    url("https://at.alicdn.com/t/font_1151553_3evtpbpfz0o.woff") format("woff"),
+    url("https://at.alicdn.com/t/font_1151553_3evtpbpfz0o.ttf")
+      format("truetype"),
+    url("https://at.alicdn.com/t/font_1151553_3evtpbpfz0o.svg#iconfont")
+      format("svg");
+}
+.icons {
+  font-family: "iconfont";
+  font-size: 0.45rem;
+  display: inline-block;
 }

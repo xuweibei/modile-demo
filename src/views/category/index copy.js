@@ -10,6 +10,7 @@ export default class Category extends React.Component {
     activeId: "",
   };
   classList = (item) => {
+    // console.log(item);
     this.setState({
       activeId: item,
     });
@@ -17,6 +18,7 @@ export default class Category extends React.Component {
   componentDidMount() {
     // console.log(methods.sortGetCategory, "较好的萨菲");
     window.axios(methods.sortGetCategory, { id: 0, types: 1 }).then((res) => {
+      console.log(res);
       if (res && res.status === 0) {
         this.setState({
           dataList: res.data,
@@ -28,11 +30,15 @@ export default class Category extends React.Component {
 
   render() {
     const { dataList, activeId } = this.state;
+
     const active = dataList.find((item) => {
       if (item.id1 === activeId) {
         return item;
       }
     });
+
+    console.log(active);
+    // console.log(dataList);
     return (
       <div className="category">
         <h2>分类</h2>
@@ -43,8 +49,8 @@ export default class Category extends React.Component {
                 return (
                   <li
                     key={item.id1}
-                    onClick={() => this.classList(item.id1)}
                     className={item.id1 === activeId ? "active-color" : ""}
+                    onClick={() => this.classList(item.id1)}
                   >
                     <span>{item.cate_name}</span>
                   </li>
@@ -62,6 +68,7 @@ export default class Category extends React.Component {
               <div className="cate_right_imgs">
                 {active
                   ? active.cate2.map((item) => {
+                      console.log(item);
                       return (
                         <div key={item.img_url} className="imgs_item">
                           <img src={item.img_url} />
