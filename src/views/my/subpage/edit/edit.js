@@ -1,24 +1,109 @@
-import React from "react";
-import NavPage from "../../../../../src/component/Nav";
-import "./edit.less";
+import React from 'react';
+import NavPage from '../../../../../src/component/Nav';
+import methods from '../../../../http/request';
+import './edit.less';
 class Edit extends React.Component {
-  componentDidMount() {}
+  state = {
+    userData: '',
+  };
+  componentDidMount() {
+    window.axios(methods.setUsed).then((res) => {
+      if (res && res.status === 0) {
+        this.setState({
+          userData: res.data,
+        });
+      }
+    });
+  }
   // 初始化数据
   initListData = () => {
+    const { userInfo } = this.props;
     const itemList = [
       {
-        key: "1",
-        name: "margin",
+        key: '1',
+        name: 'margin',
         child: [
           {
-            key: "1-1",
-            extra: "修改",
-            param: "/extname?router=extname",
-            subName: "pig",
-            value: "昵称",
-            // moredes: userInfo && userInfo.nickname,
+            key: '1-1',
+            extra: '修改',
+            param: '/extname?router=extname',
+            subName: 'pig',
+            value: '昵称',
+            moredes: userInfo && userInfo.nickname,
+          },
+          {
+            key: '1-2',
+            name: 'pho',
+            extra: '暂不可修改',
+            subName: 'phone',
+            value: '手机号',
+            moredes: userInfo && userInfo.phone,
+          },
+          {
+            key: '1-3',
+            name: 'pass',
+            arrow: 'horizontal',
+            param: '/password',
+            subName: 'lock',
+            value: '密码管理',
+          },
+          {
+            key: '1-4',
+            name: 'see',
+            arrow: 'horizontal',
+            param: '/enid?router=enid',
+            subName: 'before',
+            more: true,
+            value: '源头UID',
+          },
+          {
+            key: '1-5',
+            name: 'adr',
+            arrow: 'horizontal',
+            param: '/address',
+            subName: 'address',
+            value: '地址管理',
           },
         ],
+      },
+      {
+        key: '3',
+        name: 'margin',
+        child: [
+          {
+            key: '3-1',
+            extra:
+              userInfo && userInfo.etone_acc_user && userInfo.etone_acc_shopper
+                ? '修改'
+                : '绑定',
+            param: '/bankCard',
+            subName: 'bankCard',
+            value: '我的银行卡',
+          },
+          {
+            key: '3-2',
+            extra:
+              userInfo && userInfo.address.length > 0
+                ? userInfo.address
+                : '修改', //只允许修改一次
+            param:
+              userInfo && userInfo.address.length > 0
+                ? ''
+                : '/locationarea?router=locationarea', //只允许修改一次
+            subName: 'locationarea',
+            name: 'area',
+            value: '当前区域',
+            // moredes: userInfo && (userInfo.address ? userInfo.address.join('-') : '')
+          },
+        ],
+      },
+      {
+        key: '5',
+        name: 'not',
+        arrow: 'horizontal',
+        param: '/userAgreementDetail?router=userAgreementDetail',
+        subName: 'about',
+        value: '关于中卖网',
       },
     ];
     return this.renderListItem(itemList);
@@ -27,7 +112,7 @@ class Edit extends React.Component {
   renderListItem = (list) => {
     const listItem = [];
     list.forEach((item) => {
-      console.log(item);
+      // console.log(item);
       if (item) {
         if (item.child) {
           listItem.push(
@@ -37,13 +122,26 @@ class Edit extends React.Component {
           );
         } else {
           listItem.push(
-            <div className="list_item">
+            <div
+              key={item.key}
+              onClick={() => {
+                if (item.param) {
+                  // console.log(this.props);
+                  this.props.history.push(`${item.param}`);
+                }
+              }}
+              className="list_item"
+            >
               <div className="item_content">
-                <span className={item.subName}></span>
-                <span>昵称</span>
-                <span className="moredes">zp_190054</span>
+                <span className={`icons ${item.subName}`}></span>
+                <span>{item.value}</span>
+                {item.moredes && (
+                  <span className="moredes">{item.moredes}</span>
+                )}
               </div>
-              <div className="item_extra">修改</div>
+              {item.extra ? <div className="item_extra">{item.extra}</div> : ''}
+
+              {item.arrow ? <div className="icons am_list_arrow"></div> : ''}
             </div>
           );
         }
@@ -52,18 +150,23 @@ class Edit extends React.Component {
     return listItem;
   };
   render() {
+    const { userData } = this.state;
+    // console.log(userData);
     return (
       <div className="edit">
-        <NavPage />
+        <NavPage bgColor="white" title="设置" />
         <div className="banner">
           <div className="banner_center">
-            <img src="https://img.zzha.vip/cam/assets/img/myAccount/default.png?0" />
-            <div>UID:190054</div>
+            <img src={userData.defaultUrl} />
+            <div>UID:{userData.no}</div>
           </div>
         </div>
         <div className="my_list">
           <div className="my_list_body">{this.initListData()}</div>
         </div>
+        <a className="log_out">
+          <span>退出当前账号</span>
+        </a>
         {/* <div className="my_list">
           <div className="my_list_body">
             <div className="list_item">

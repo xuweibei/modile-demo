@@ -12,7 +12,7 @@
     display: -webkit-box;
     box-pack: center;
     -webkit-box-pack: center;
-    font-family: "PingFang-SC-Medium";
+    font-family: 'PingFang-SC-Medium';
   }
   .banner_center {
     height: 3.8rem;
@@ -47,6 +47,7 @@
     white-space: nowrap;
     padding-top: 0.14rem;
     padding-bottom: 0.14rem;
+    font-weight: 500;
 
     .icons {
       color: #f20c00;
@@ -57,34 +58,34 @@
     }
 
     .pig:before {
-      content: "\E650";
+      content: '\E650';
     }
     .phone:before {
-      content: "\E64E";
+      content: '\E64E';
     }
     .lock:before {
-      content: "\E652";
+      content: '\E652';
     }
     .before:before {
-      content: "\E651";
+      content: '\E651';
     }
     .address:before {
-      content: "\E648";
+      content: '\E648';
     }
     .binding:before {
-      content: "\E653";
+      content: '\E653';
     }
-    .bank_card:before {
-      content: "\E64B";
+    .bankCard:before {
+      content: '\E64B';
     }
     .binding:before {
-      content: "\E653";
+      content: '\E653';
     }
     .locationarea:before {
-      content: "\E666";
+      content: '\E666';
     }
     .about:before {
-      content: "\E654";
+      content: '\E654';
     }
 
     .moredes {
@@ -103,11 +104,31 @@
     margin-top: 0.12rem;
   }
   .am_list_arrow:before {
-    content: "\E643";
+    content: '\E643';
     font-size: 0.32rem;
     color: #bfbfbf;
   }
   .margin {
     margin-bottom: 0.2rem;
+  }
+  .margin .list_item:nth-last-child(1) {
+    border: none;
+  }
+  .log_out {
+    display: block;
+    width: 6.6rem;
+    height: 1rem;
+    line-height: 1rem;
+    background: linear-gradient(180deg, #ff2d51 0%, #f20c00 100%);
+    margin: 0.2rem auto;
+    border-radius: 0.5rem;
+
+    text-align: center;
+    span {
+      font-size: 0.36rem;
+      color: #fff;
+      font-family: 'PingFang-SC-Bold';
+      font-weight: bold;
+    }
   }
 }

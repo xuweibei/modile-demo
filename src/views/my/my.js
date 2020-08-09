@@ -1,13 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Footer from "../../component/Footer";
-import methods from "../../http/request";
-import "./my.less";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Footer from '../../component/Footer';
+import methods from '../../http/request';
+import './my.less';
 
 export default class MyPage extends React.Component {
   state = {
     dataList: [],
-    dataInfo: "",
+    dataInfo: '',
     offLineMenu: [],
     onLineMenu: [],
     conumerMenu: [],
@@ -44,8 +44,8 @@ export default class MyPage extends React.Component {
                 {/* <Link to='/edit'><div className="icons icon_setUp"></div></Link> */}
                 <div
                   onClick={() => {
-                    console.log(this.props);
-                    this.props.history.push("/edit");
+                    // console.log(this.props);
+                    this.props.history.push('/edit');
                   }}
                   className="icons icon_setUp"
                 ></div>

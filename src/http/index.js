@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 // http request 拦截器
 axios.interceptors.request.use(
@@ -6,7 +6,7 @@ axios.interceptors.request.use(
     // const state = store.getState();
     // const userToken = state.get('base').get(LOCALSTORAGE.USER_TOKEN);
     if (!config.data) config.data = {};
-    config.data.userToken = "97e216aG18g1ccMdb53dfb30c3954220b2610cdab66";
+    config.data.userToken = '2b0c1e6d7di05ea652399a39b3a74627b2cf2c137c7';
     // config.data.userToken =
     //   userToken ||
     //   (window.localStorage.getItem('zpyg_userToken') === 'null'
@@ -32,10 +32,10 @@ axios.interceptors.response.use((response) => {
   return response;
 });
 
-window.axios = async function (url, parmas, method = "post") {
+window.axios = async function (url, parmas, method = 'post') {
   //   alert(url);
   let data = {};
-  if (method === "post") {
+  if (method === 'post') {
     data = await axios
       .post(url, parmas)
       .then((res) => {
