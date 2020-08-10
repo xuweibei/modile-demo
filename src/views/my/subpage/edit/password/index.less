@@ -1,14 +1,44 @@
+html,
+body {
+  background: #f9f9f9;
+  color: #333;
+  font-size: 0.3rem;
+}
 .password {
+  width: 100%;
+  line-height: 1.15;
   .land {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
-    padding: 0.38rem 0.35rem;
-    margin-top: 0.2rem;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
+    // /* -webkit-box-pack: justify; */
+    // /* -webkit-justify-content: space-between; */
     -ms-flex-pack: justify;
     justify-content: space-between;
+    padding: 0.38rem 0.32rem;
+    background-color: #fff;
+    margin-top: 0.2rem;
   }
   .land_lo:before {
     content: '\E614';
+    color: #6630ff;
+  }
+  .land_c {
+    display: flex;
+    span {
+      line-height: 0.5rem;
+      color: #333;
+      font-size: 0.3rem;
+      margin-left: -2.6rem;
+    }
+  }
+  .land_lt:before {
+    content: '\E614';
+    color: #ffcd00;
+  }
+  .land_r:before {
+    content: '\E643';
+    color: #999;
   }
 }

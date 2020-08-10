@@ -17,7 +17,7 @@ class Edit extends React.Component {
   }
   // 初始化数据
   initListData = () => {
-    const { userInfo } = this.props;
+    const { userData } = this.state;
     const itemList = [
       {
         key: '1',
@@ -29,7 +29,7 @@ class Edit extends React.Component {
             param: '/extname?router=extname',
             subName: 'pig',
             value: '昵称',
-            moredes: userInfo && userInfo.nickname,
+            moredes: userData && userData.nickname,
           },
           {
             key: '1-2',
@@ -37,7 +37,7 @@ class Edit extends React.Component {
             extra: '暂不可修改',
             subName: 'phone',
             value: '手机号',
-            moredes: userInfo && userInfo.phone,
+            moredes: userData && userData.phone,
           },
           {
             key: '1-3',
@@ -73,7 +73,7 @@ class Edit extends React.Component {
           {
             key: '3-1',
             extra:
-              userInfo && userInfo.etone_acc_user && userInfo.etone_acc_shopper
+              userData && userData.etone_acc_user && userData.etone_acc_shopper
                 ? '修改'
                 : '绑定',
             param: '/bankCard',
@@ -83,11 +83,11 @@ class Edit extends React.Component {
           {
             key: '3-2',
             extra:
-              userInfo && userInfo.address.length > 0
-                ? userInfo.address
+              userData && userData.address.length > 0
+                ? userData.address
                 : '修改', //只允许修改一次
             param:
-              userInfo && userInfo.address.length > 0
+              userData && userData.address.length > 0
                 ? ''
                 : '/locationarea?router=locationarea', //只允许修改一次
             subName: 'locationarea',

@@ -9,6 +9,8 @@ const methods = {
   sortGetCategory: api + 'sort-get-category',
   MyUserinfo: api + 'my-userinfo',
   setUsed: api + 'set-used',
+  vcode: api + 'vcode',
+  checkVcode: api + 'check-vcode',
 };
 
 export default methods;
