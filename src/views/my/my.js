@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Footer from '../../component/Footer';
 import methods from '../../http/request';
 import './my.less';
@@ -26,14 +25,8 @@ export default class MyPage extends React.Component {
     });
   }
   render() {
-    const {
-      dataList,
-      dataInfo,
-      offLineMenu,
-      onLineMenu,
-      conumerMenu,
-    } = this.state;
-    // console.log(offLine);
+    const { dataInfo, offLineMenu, onLineMenu, conumerMenu } = this.state;
+    // console.log(onLineMenu);
     return (
       <div className="my">
         <div className="my_content">
@@ -41,7 +34,6 @@ export default class MyPage extends React.Component {
             <div className="my_top_info">
               <div className="my_info_icon">
                 <div className="white_space"></div>
-                {/* <Link to='/edit'><div className="icons icon_setUp"></div></Link> */}
                 <div
                   onClick={() => {
                     // console.log(this.props);
@@ -54,7 +46,7 @@ export default class MyPage extends React.Component {
               <div className="my_top_basic">
                 <div className="info_basic_portrait">
                   <div className="basic_img_wrap">
-                    <img src={dataInfo.avatarUrl} />
+                    <img src={dataInfo.avatarUrl} alt="图片加载失败" />
                   </div>
                 </div>
                 <div className="info_basic_data">
@@ -90,7 +82,7 @@ export default class MyPage extends React.Component {
             </div>
           </div>
           <div className="my_set_shop">
-            <img src={dataInfo.shop_url} />
+            <img src={dataInfo.shop_url} alt="图片加载失败" />
           </div>
           <div className="my_order_form">
             <div className="my_order_top">
@@ -104,8 +96,8 @@ export default class MyPage extends React.Component {
               <ul className="my_order_list">
                 {offLineMenu.map((item) => {
                   return (
-                    <li className="order_info">
-                      <img src={item.image} />
+                    <li key={item.url} className="order_info">
+                      <img src={item.image} alt="图片加载失败" />
                       <div>{item.value}</div>
                     </li>
                   );
@@ -126,8 +118,8 @@ export default class MyPage extends React.Component {
               <ul className="my_order_list">
                 {onLineMenu.map((item) => {
                   return (
-                    <li className="order_info">
-                      <img src={item.image} />
+                    <li key={item.url} className="order_info">
+                      <img src={item.image} alt="图片加载失败" />
                       <div>{item.value}</div>
                     </li>
                   );
@@ -140,9 +132,9 @@ export default class MyPage extends React.Component {
               <div className="conumer_info">
                 {conumerMenu.map((item) => {
                   return (
-                    <div className="am_list">
+                    <div key={item.image} className="am_list">
                       <div className="am_list_content">
-                        <img src={item.image} />
+                        <img src={item.image} alt="图片加载失败" />
                         {/* <span className="icons busin">
                             
                         </span> */}
@@ -155,7 +147,10 @@ export default class MyPage extends React.Component {
               </div>
 
               <div className="my-banner">
-                <img src="https://img.zzha.vip/apppic/under.png?233333" />
+                <img
+                  alt="图片加载失败"
+                  src="https://img.zzha.vip/apppic/under.png?233333"
+                />
               </div>
             </div>
           </div>

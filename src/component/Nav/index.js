@@ -1,11 +1,12 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import './index.less';
 
-export default class NavPage extends React.Component {
+class NavPage extends React.Component {
   render() {
     const { title, bgColor } = this.props;
-    const isOff = bgColor == 'white';
-    console.log(bgColor);
+    const isOff = bgColor === 'white';
+    // console.log(bgColor);
     return (
       <div className="wrap_tab_nav">
         <div
@@ -17,7 +18,7 @@ export default class NavPage extends React.Component {
         >
           <div
             onClick={() => {
-              window.history.back();
+              this.props.history.goBack();
             }}
             className="black_nav_left"
           >
@@ -29,3 +30,4 @@ export default class NavPage extends React.Component {
     );
   }
 }
+export default withRouter(NavPage);

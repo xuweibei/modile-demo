@@ -133,61 +133,26 @@ input {
     }
   }
 }
-
-//设置密码
-.set_password {
+//设置支付密码
+.payment_box {
+  position: absolute;
+  top: 1.1rem;
+  bottom: 0;
   width: 100%;
-  overflow: hidden;
-  .cipher_box {
-    background: #fff;
-    position: absolute;
-    top: 1.1rem;
-    bottom: 0;
-    width: 100%;
+  background: #fff;
+  padding-top: 1rem;
+  .payment_item {
+    padding: 0 0.7rem;
+    margin-bottom: 0.8rem;
   }
-  .list_line {
-    padding: 0 0.3rem;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #eee;
+  .payment_main {
+    border: 0.025rem solid #ff2d51;
+    height: 1rem;
   }
-  .input_lable {
-    width: 1.7rem;
-  }
-  .input_control {
-    flex: 1;
-    input {
-      text-align: right;
-      width: 100%;
-      color: #333;
-    }
-  }
-  .input_clear {
-    // display: none;
-    width: 0.42rem;
-    height: 0.42rem;
-    background-color: #ccc;
-    border-radius: 50%;
-    color: #fff;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-size: 0.42rem auto;
-  }
-  .icon_box {
-    float: right;
-    div {
-      margin: 0 0.3rem;
-    }
-    .icon_open {
-      display: inline-block;
-    }
-    .icon_open:before {
-      content: '\E65F';
-      color: #ff5774;
-    }
-    .icon_close:before {
-      content: '\E67B';
-      color: #ccc;
-    }
+  .tips {
+    margin: 0.1rem 0;
+    text-align: center;
+    color: #333;
+    font-size: 0.28rem;
   }
 }

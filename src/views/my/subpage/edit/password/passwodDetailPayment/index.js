@@ -7,18 +7,17 @@ import './index.less';
 
 const alert = Modal.alert;
 
-export default class PassWordDetail extends React.Component {
+export default class PassWordPayment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      timeNow: 10, //验证倒计时默认时间
+      timeNow: 60, //验证倒计时默认时间
       isDown: false,
       phoneShow: true, //显示手机验证
-      passShow: false, //显示密码验证
-      passwordValue: '', //输入密码value
-      sureValue: '', //确认密码value
-      passType: true, //第一个密码框的状态
-      passAType: true, //第二个密码框的状态
+      setPaymentShow: false, //显示设置支付密码
+      setPasswordValue: '', //设置支付密码框的值
+      setPasswordRepeat: '', //确认设置支付密码框的值
+      phoneValue: '', //手机号
     };
   }
 
@@ -40,11 +39,11 @@ export default class PassWordDetail extends React.Component {
   nextStep = () => {
     let telInput = this.refs.telInput.state.value;
     if (!telInput) {
-      Toast.info('请输入手机号', 1);
+      Toast.info('请输入内容', 1);
       return;
     }
     if (!/^1[3456789]\d{9}$/.test(telInput)) {
-      Toast.info('请输入正确的手机号', 1);
+      Toast.info('输入有误', 1);
       return;
     }
     return telInput;
@@ -67,7 +66,7 @@ export default class PassWordDetail extends React.Component {
         if (res.status === 0) {
           this.setState({
             phoneShow: false,
-            passShow: true,
+            setPaymentShow: true,
           });
         }
       });
@@ -98,11 +97,12 @@ export default class PassWordDetail extends React.Component {
   sureFn = () => {
     const { passwordValue, sureValue } = this.state;
     if (passwordValue === '') {
-      Toast.info('密码不能为空', 1);
+      Toast.info('输入密码不能为空', 1);
     }
     if (sureValue === '') {
-      Toast.info('密码不能为空', 1);
+      Toast.info('确认密码不能为空', 1);
     }
+    // ||
     if (passwordValue.trim().length >= 6) {
       console.log(passwordValue, sureValue);
       console.log(passwordValue === sureValue);
@@ -117,45 +117,60 @@ export default class PassWordDetail extends React.Component {
     }
   };
 
-  alertModal = () => {
-    alert('登入密码设置成功，是否现在去设置支付密码', '', [
-      {
-        text: '稍后',
-        onPress: () => {
-          this.props.history.push('/password');
-        },
-      },
-      {
-        text: '好的',
-        onPress: () => {
-          this.props.history.push('/passWordDetailPayment');
-        },
-      },
-    ]);
-  };
-  //控制眼睛
-  changeEyes = (onOff) => {
-    if (onOff === '1') {
-      this.setState((prevState) => ({
-        passAType: !prevState.passAType,
-      }));
-    } else {
-      this.setState((prevState) => ({
-        passType: !prevState.passType,
-      }));
+  //输入支付密码不足6位时
+  blurFn = () => {
+    const { setPasswordValue } = this.state;
+    if (setPasswordValue.length !== 6) {
+      Toast.info('请输入6位数字密码', 1);
     }
   };
+  //再次输入支付密码不足6位时
+  blurFnTwo = () => {
+    const { setPasswordRepeat } = this.state;
+    if (setPasswordRepeat.length !== 6) {
+      Toast.info('请输入6位数字密码', 1);
+    }
+  };
+  //判断设置密码是否一致
+  setPasswordFn = () => {
+    const { setPasswordValue, setPasswordRepeat, phoneValue } = this.state;
+    const reg = /^[0-9]*$/;
+    if (setPasswordValue.length === 6 && setPasswordRepeat.length === 6) {
+      if (reg.test(setPasswordValue) && reg.test(setPasswordRepeat)) {
+        if (setPasswordValue === setPasswordRepeat) {
+          window
+            .axios(methods.modifyPaypwd, {
+              phone: phoneValue,
+              pwd: setPasswordRepeat,
+            })
+            .then((res) => {
+              if (res.status === 0) {
+                this.props.history.push('/edit');
+                Toast.info('支付密码设置成功！', 1);
+              } else {
+                Toast.info('支付密码不能和登录密码一样！', 1);
+              }
+            });
+        } else {
+          Toast.info('密码不一致', 1);
+        }
+      } else {
+        Toast.info('密码必须为数字', 1);
+      }
+    }
+    // if (setPasswordValue === setPasswordRepeat) {
 
+    // }
+  };
   render() {
     const {
       timeNow,
       isDown,
       phoneShow,
-      passShow,
-      passwordValue,
-      sureValue,
-      passType,
-      passAType,
+      setPaymentShow,
+      setPasswordValue,
+      setPasswordRepeat,
+      phoneValue,
     } = this.state;
     // console.log(phoneShow);
     return (
@@ -173,6 +188,12 @@ export default class PassWordDetail extends React.Component {
                       ref="telInput"
                       type="tel"
                       placeholder="请输入手机号码"
+                      onChange={(e) => {
+                        this.setState({
+                          phoneValue: e,
+                        });
+                      }}
+                      value={phoneValue}
                     />
                   </div>
                 </div>
@@ -185,6 +206,7 @@ export default class PassWordDetail extends React.Component {
                       ref="gainCode"
                       className="code_input_control"
                       type="number"
+                      maxLength="4"
                     />
                   </div>
                   <div className="gain_code_wrap">
@@ -207,84 +229,59 @@ export default class PassWordDetail extends React.Component {
             </div>
           </div>
         )}
-        {passShow && (
-          <div className="set_password">
-            <NavPage title="设置登录密码" />
-            <div className="cipher_box">
-              <div className="input_item">
-                <div className="input_wrap">
-                  <div className="icon_box" onClick={this.changeEyes}>
-                    <div
-                      className={`icons ${
-                        passType ? 'icon_close' : 'icon_open'
-                      }`}
-                    ></div>
-                    {/* <div className="icons icon_close"></div> */}
-                  </div>
-                  <div className="list_line">
-                    <div className="input_lable">输入密码</div>
-                    <div className="input_control">
-                      <InputItem
-                        type={passType ? 'password' : 'text'}
-                        onChange={(e) => {
-                          this.setState({
-                            passwordValue: e,
-                          });
-                        }}
-                        placeholder="******"
-                        maxLength="8"
-                        value={passwordValue}
-                        clear
-                        editable
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="input_item">
-                <div className="input_wrap">
-                  <div
-                    className="icon_box"
-                    onClick={() => {
-                      this.changeEyes('1');
+        {setPaymentShow && (
+          <div className="set_payment">
+            <NavPage title="设置支付密码" />
+            <div className="payment_box">
+              <div className="payment_item">
+                <p>请输入支付密码</p>
+                <div className="payment_main">
+                  <InputItem
+                    onBlur={() => {
+                      this.blurFn();
                     }}
-                  >
-                    <div
-                      className={`icons ${
-                        passAType ? 'icon_close' : 'icon_open'
-                      }`}
-                    ></div>
-                  </div>
-                  <div className="list_line">
-                    <div className="input_lable">确认密码</div>
-                    <div className="input_control">
-                      <InputItem
-                        onChange={(e) => {
-                          this.setState({
-                            sureValue: e,
-                          });
-                        }}
-                        type={passAType ? 'password' : 'text'}
-                        value={sureValue}
-                        ref="inputPassword"
-                        placeholder="******"
-                        maxLength="8"
-                        clear
-                      />
-                    </div>
-                  </div>
+                    onChange={(e) => {
+                      this.setState(
+                        {
+                          setPasswordValue: e,
+                        },
+                        () => {
+                          this.setPasswordFn();
+                        }
+                      );
+                    }}
+                    value={setPasswordValue}
+                    type="password"
+                    maxLength="6"
+                    clear
+                  />
                 </div>
               </div>
-
-              <div className="next_button" onClick={this.sureFn}>
-                <span>确定</span>
+              <div className="payment_item">
+                <p>请再次输入支付密码</p>
+                <div className="payment_main">
+                  <InputItem
+                    onBlur={() => {
+                      this.blurFnTwo();
+                    }}
+                    onChange={(e) => {
+                      this.setState(
+                        {
+                          setPasswordRepeat: e,
+                        },
+                        () => {
+                          this.setPasswordFn();
+                        }
+                      );
+                    }}
+                    maxLength="6"
+                    type="password"
+                    value={setPasswordRepeat}
+                    clear
+                  />
+                </div>
               </div>
-              {/* 
-              <Modal
-                title="登入密码设置成功，是否现在去设置支付密码"
-                transparent
-                visible={this.state.visible} //设置默认隐藏
-              ></Modal> */}
+              <p className="tips">不可与登入密码相同</p>
             </div>
           </div>
         )}

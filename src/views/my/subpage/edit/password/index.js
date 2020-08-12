@@ -9,7 +9,7 @@ export default class PassWord extends React.Component {
         <NavPage title="密码设置" />
         <div
           onClick={() => {
-            this.props.history.push('/passwordDetail');
+            this.props.history.push('/passWordDetail');
           }}
           className="land"
         >
@@ -19,7 +19,12 @@ export default class PassWord extends React.Component {
           </div>
           <div className="icons land_r"></div>
         </div>
-        <div className="land">
+        <div
+          onClick={() => {
+            this.props.history.push('/passWordDetailPayment');
+          }}
+          className="land"
+        >
           <div className="icons land_lt"></div>
           <div className="land_c">
             <span>修改支付密码</span>

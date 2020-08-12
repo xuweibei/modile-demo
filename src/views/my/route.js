@@ -20,13 +20,22 @@ const PassWordDetail = Loadable({
   loader: () => import('./subpage/edit/password/passwordDetail'),
   loading: () => null,
 });
+const PassWordDetailPayment = Loadable({
+  loader: () => import('./subpage/edit/password/passwodDetailPayment'),
+  loading: () => null,
+});
 
 const My = () => (
   <React.Fragment>
     <Route exact path="/my" component={MyPage} />
     <Route exact path="/edit" component={EditPage} />
     <Route exact path="/password" component={PassWord} />
-    <Route exact path="/passwordDetail" component={PassWordDetail} />
+    <Route exact path="/passWordDetail" component={PassWordDetail} />
+    <Route
+      exact
+      path="/passWordDetailPayment"
+      component={PassWordDetailPayment}
+    />
   </React.Fragment>
 );
 

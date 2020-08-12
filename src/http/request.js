@@ -11,6 +11,7 @@ const methods = {
   setUsed: api + 'set-used',
   vcode: api + 'vcode',
   checkVcode: api + 'check-vcode',
+  modifyPaypwd: api + 'modifypaypwd',
 };
 
 export default methods;
