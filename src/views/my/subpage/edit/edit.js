@@ -26,7 +26,7 @@ class Edit extends React.Component {
           {
             key: '1-1',
             extra: '修改',
-            param: '/extname?router=extname',
+            param: '/extname',
             subName: 'pig',
             value: '昵称',
             moredes: userData && userData.nickname,
@@ -51,7 +51,7 @@ class Edit extends React.Component {
             key: '1-4',
             name: 'see',
             arrow: 'horizontal',
-            param: '/enid?router=enid',
+            param: '/enid',
             subName: 'before',
             more: true,
             value: '源头UID',
@@ -87,9 +87,7 @@ class Edit extends React.Component {
                 ? userData.address
                 : '修改', //只允许修改一次
             param:
-              userData && userData.address.length > 0
-                ? ''
-                : '/locationarea?router=locationarea', //只允许修改一次
+              userData && userData.address.length > 0 ? '' : '/locationarea', //只允许修改一次
             subName: 'locationarea',
             name: 'area',
             value: '当前区域',
@@ -101,7 +99,7 @@ class Edit extends React.Component {
         key: '5',
         name: 'not',
         arrow: 'horizontal',
-        param: '/userAgreementDetail?router=userAgreementDetail',
+        param: '/userAgreementDetail',
         subName: 'about',
         value: '关于中卖网',
       },
@@ -157,14 +155,14 @@ class Edit extends React.Component {
         <NavPage bgColor="white" title="设置" />
         <div className="banner">
           <div className="banner_center">
-            <img src={userData.defaultUrl} />
+            <img src={userData.defaultUrl} alt="图片加载失败" />
             <div>UID:{userData.no}</div>
           </div>
         </div>
         <div className="my_list">
           <div className="my_list_body">{this.initListData()}</div>
         </div>
-        <a className="log_out">
+        <a className="log_out" href="javaScript">
           <span>退出当前账号</span>
         </a>
         {/* <div className="my_list">

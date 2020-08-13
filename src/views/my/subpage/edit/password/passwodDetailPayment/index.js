@@ -172,7 +172,6 @@ export default class PassWordPayment extends React.Component {
       setPasswordRepeat,
       phoneValue,
     } = this.state;
-    // console.log(phoneShow);
     return (
       <div className="password_detail">
         {phoneShow && (

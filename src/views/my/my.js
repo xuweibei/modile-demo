@@ -62,7 +62,12 @@ export default class MyPage extends React.Component {
             </div>
             <div className="my_top_icon">
               <ul className="navigation_bar">
-                <li className="left">
+                <li
+                  className="left"
+                  onClick={() => {
+                    this.props.history.push('/collect');
+                  }}
+                >
                   <div className="icons sharing"></div>
                   <div>收藏夹</div>
                 </li>

@@ -6,7 +6,7 @@ axios.interceptors.request.use(
     // const state = store.getState();
     // const userToken = state.get('base').get(LOCALSTORAGE.USER_TOKEN);
     if (!config.data) config.data = {};
-    config.data.userToken = 'c2ef10fUcandc4X3073ced33b3ef462862d38485a5f';
+    config.data.userToken = 'd0571c0H70Wc33A131301a3503124b2042bc8312df0';
     // config.data.userToken =
     //   userToken ||
     //   (window.localStorage.getItem('zpyg_userToken') === 'null'
