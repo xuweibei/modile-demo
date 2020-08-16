@@ -8,9 +8,7 @@ let timer = null;
 class Loign extends React.Component {
   submit = () => {
     this.props.form.validateFields((err, values) => {
-      console.log(err, values, '是的罚款');
       if (!err) {
-        console.log(values);
         window
           .axios(methods.login, {
             code: values.phone.replace(/\s+/g, '') + 'UUUUUUUUUU' + values.code,

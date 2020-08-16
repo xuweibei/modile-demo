@@ -1,18 +1,12 @@
 import axios from 'axios';
 import appHistory from '../utils/appHistory';
+import { Toast } from 'antd-mobile';
 
 // http request 拦截器
 axios.interceptors.request.use(
   (config) => {
-    // const state = store.getState();
-    // const userToken = state.get('base').get(LOCALSTORAGE.USER_TOKEN);
     if (!config.data) config.data = {};
     config.data.userToken = localStorage.getItem('userToken');
-    // config.data.userToken =
-    //   userToken ||
-    //   (window.localStorage.getItem('zpyg_userToken') === 'null'
-    //     ? ''
-    //     : window.localStorage.getItem('zpyg_userToken'));
     return config;
   },
   (error) => {
@@ -22,6 +16,9 @@ axios.interceptors.request.use(
 
 // http response 拦截器
 axios.interceptors.response.use((response) => {
+  if (response.data.status !== 0) {
+    Toast.fail(response.data.message);
+  }
   if (response.data.status === 100 || response.data.status === 101) {
     window.location.hash = '#/login';
   }
