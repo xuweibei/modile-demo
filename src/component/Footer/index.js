@@ -12,6 +12,11 @@ class Footer extends React.Component {
       current: props.parentShow,
     };
   }
+  componentDidMount() {
+    this.setState({
+      current: window.location.hash.slice(2),
+    });
+  }
   handleClick = (value) => {
     this.props.setFooter(value.key);
     this.setState({
@@ -28,25 +33,16 @@ class Footer extends React.Component {
           mode="horizontal"
           className="menus-list"
         >
-          <Menu.Item
-            key="home"
-            icon={<span className="iconfont">&#xe613;</span>}
-          >
+          <Menu.Item key="home" icon={<span className="icons home"></span>}>
             <Link to="/home">首页</Link>
           </Menu.Item>
-          <Menu.Item
-            key="category"
-            icon={<span className="iconfont">&#xe623;</span>}
-          >
+          <Menu.Item key="category" icon={<span className="icons set"></span>}>
             <Link to="/category">分类</Link>
           </Menu.Item>
-          <Menu.Item
-            key="shopCart"
-            icon={<span className="iconfont">&#xe600;</span>}
-          >
+          <Menu.Item key="shopCart" icon={<span className="icons shop"></span>}>
             <Link to="/shopCart">购物车</Link>
           </Menu.Item>
-          <Menu.Item key="my" icon={<span className="iconfont">&#xe658;</span>}>
+          <Menu.Item key="my" icon={<span className="icons myi"></span>}>
             <Link to="/my">我的</Link>
           </Menu.Item>
         </Menu>

@@ -147,6 +147,13 @@ class Edit extends React.Component {
     });
     return listItem;
   };
+
+  //退出登录
+  goOutLogin = () => {
+    localStorage.clear();
+    this.props.history.push('/login');
+  };
+
   render() {
     const { userData } = this.state;
     // console.log(userData);
@@ -162,7 +169,7 @@ class Edit extends React.Component {
         <div className="my_list">
           <div className="my_list_body">{this.initListData()}</div>
         </div>
-        <a className="log_out" href="javaScript">
+        <a className="log_out" onClick={this.goOutLogin}>
           <span>退出当前账号</span>
         </a>
         {/* <div className="my_list">

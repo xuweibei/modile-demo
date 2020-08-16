@@ -1,4 +1,5 @@
 import axios from 'axios';
+import appHistory from '../utils/appHistory';
 
 // http request 拦截器
 axios.interceptors.request.use(
@@ -6,7 +7,7 @@ axios.interceptors.request.use(
     // const state = store.getState();
     // const userToken = state.get('base').get(LOCALSTORAGE.USER_TOKEN);
     if (!config.data) config.data = {};
-    config.data.userToken = 'd0571c0H70Wc33A131301a3503124b2042bc8312df0';
+    config.data.userToken = localStorage.getItem('userToken');
     // config.data.userToken =
     //   userToken ||
     //   (window.localStorage.getItem('zpyg_userToken') === 'null'
@@ -22,12 +23,7 @@ axios.interceptors.request.use(
 // http response 拦截器
 axios.interceptors.response.use((response) => {
   if (response.data.status === 100 || response.data.status === 101) {
-    if (process.env.NATIVE) {
-      // removeValue(LOCALSTORAGE.USER_TOKEN); // 清除token,localstorage
-      // store.dispatch(actionCreator.setUserToken('')); // 清除redux的userToken
-    } else {
-      // appHistory.push('/login');
-    }
+    window.location.hash = '#/login';
   }
   return response;
 });

@@ -5,7 +5,7 @@ export default class ShopCart extends React.Component {
   render() {
     return (
       <div>
-        购物车123
+        购物车
         <Footer />
       </div>
     );
